@@ -137,7 +137,7 @@ public class SurveyController {
 		surveis = surveyService.findAll();
 
 		result = new ModelAndView("vote/list");
-
+		System.out.println(surveis + "Hola");
 		result.addObject("survey", surveis);
 
 		return result;

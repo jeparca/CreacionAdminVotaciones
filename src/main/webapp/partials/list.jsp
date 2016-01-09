@@ -13,21 +13,17 @@
 	pagesize="5" class="displaytag">
 
 	<!-- Mostramos el título de la encuesta -->
-	<spring:message code="survey.title" var="titleHeader" />
+	<p>verrde</p>
 	<display:column property="survey.title" title="${titleHeader}" />
 
 	<!-- Creamos un boton para acceder a la edicion de la encuesta -->
 	<display:column>
-		<a href="survey/edit.do?surveyId=${row.id}"> <spring:message
-				code="survey.edit" />
+		<a href="survey/edit.do?surveyId=${row.id}"> 	<p>Editar</p>
 		</a>
 	</display:column>
 
 </display:table>
 
 <!-- Creamos un boton para crear una nueva encuesta -->
-<display:column>
-	<a href="survery/create.do?surveryId=${row.id}"> <spring:message
-			code="survery.create" />
+	<a href="survery/create.do?surveryId=${row.id}"> 	<p>Crear</p>
 	</a>
-</display:column>

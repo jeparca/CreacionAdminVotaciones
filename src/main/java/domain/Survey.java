@@ -31,7 +31,7 @@ public class Survey extends DomainEntity implements Serializable {
 	private Date startDate;
 	private Date endDate;
 	private Integer census;
-	private String type;
+	private String tipo;
 
 	public Survey() {
 		super();
@@ -76,12 +76,12 @@ public class Survey extends DomainEntity implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public String getType() {
-		return type;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public Integer getCensus() {

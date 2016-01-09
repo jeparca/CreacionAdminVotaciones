@@ -10,8 +10,8 @@ function($routeProvider,$locationProvider) {
 		templateUrl: 'partials/form.html',
 		controller : 'createController'
 	}),
-	$routeProvider.when('/list', {
-		templateUrl: 'partials/list.html',
+	$routeProvider.when('/vote/list', {
+		templateUrl: 'partials/list.jsp',
 		controller : 'listController'
 	});
 }]);
