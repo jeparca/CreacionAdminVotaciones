@@ -19,63 +19,71 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Survey extends DomainEntity implements Serializable{
-	
+public class Survey extends DomainEntity implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 749544364605664829L;
-	//Attributes
+	// Attributes
 	private String title;
 	private String description;
 	private Date startDate;
 	private Date endDate;
 	private Integer census;
 	private String type;
-	
+
 	public Survey() {
 		super();
 		questions = new LinkedList<Question>();
 	}
-	
-	//Methods
+
+	// Methods
 	@NotBlank
-	@Length(min=5, max=100, message="The field must be between 5 and 10 characters")
+	@Length(min = 5, max = 100, message = "The field must be between 5 and 10 characters")
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	@NotBlank
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	@DateTimeFormat(pattern="yyyy/MM/dd")
+
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getStartDate() {
 		return startDate;
 	}
+
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	@DateTimeFormat(pattern="yyyy/MM/dd")
+
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getEndDate() {
 		return endDate;
 	}
+
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public String getType(){
+
+	public String getType() {
 		return type;
 	}
-	public void setType(String type){
-		this.type=type;
+
+	public void setType(String type) {
+		this.type = type;
 	}
+
 	public Integer getCensus() {
 		return census;
 	}
@@ -84,13 +92,10 @@ public class Survey extends DomainEntity implements Serializable{
 		this.census = census;
 	}
 
-
-
-
-	//Relationships
-	private Collection<Question>questions;
+	// Relationships
+	private Collection<Question> questions;
 	private String usernameCreator;
-	
+
 	public String getUsernameCreator() {
 		return usernameCreator;
 	}
@@ -98,8 +103,8 @@ public class Survey extends DomainEntity implements Serializable{
 	public void setUsernameCreator(String usernameCreator) {
 		this.usernameCreator = usernameCreator;
 	}
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@NotEmpty
 	public Collection<Question> getQuestions() {
 		return questions;
@@ -108,10 +113,12 @@ public class Survey extends DomainEntity implements Serializable{
 	public void setQuestions(Collection<Question> questions) {
 		this.questions = questions;
 	}
-	public void addQuestion(Question q){
+
+	public void addQuestion(Question q) {
 		questions.add(q);
 	}
-	public void removeQuestion(Question q){
+
+	public void removeQuestion(Question q) {
 		questions.remove(q);
 	}
 
@@ -121,7 +128,5 @@ public class Survey extends DomainEntity implements Serializable{
 				+ ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", census=" + census + ", questions=" + questions + "]";
 	}
-	
-	
-	
+
 }
