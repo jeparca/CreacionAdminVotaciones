@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import services.SurveyService;
 
@@ -123,5 +124,20 @@ public class SurveyController {
 		Survey s = surveyService.findOne(id);
 		return s;
 	}
+	
+	//crear una votacion
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Survey survey;
 
+		survey = surveyService.create();
+
+		result = new ModelAndView("vote/create");
+
+		result.addObject("survey", survey);
+		
+
+		return result;
+	}
 }

@@ -77,4 +77,12 @@ public class SurveyService {
 	public Collection<Survey> allSurveys() {
 		return surveyRepository.findAll();
 	}
+	
+	public Survey create(){
+		Survey result;
+		
+		result = new Survey();
+
+		return result;
+	}
 }
