@@ -3,6 +3,7 @@ package controllers;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,18 +24,22 @@ public class SurveyListController {
 	private SurveyService surveyService;
 	
 	// Método que lista las encuestas
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
-		ModelAndView result;
-		Collection<Survey> surveis;
-
-		surveis = surveyService.findAll();
-
-		result = new ModelAndView("#/vote/list");
-		System.out.println(surveis + "Hola");
-		result.addObject("survey", surveis);
-
-		return result;
-
+//	@RequestMapping(value = "/list", method = RequestMethod.GET)
+//	public ModelAndView list() {
+//		ModelAndView result;
+//		Collection<Survey> surveis;
+//
+//		surveis = surveyService.findAll();
+//
+//		result = new ModelAndView("#/vote/list");
+//		System.out.println(surveis + "Hola");
+//		result.addObject("survey", surveis);
+//
+//		return result;
+//
+//	}
+	@ModelAttribute("list")
+	public Collection<Survey> getInstruments() {
+		return surveyService.findAll();
 	}
 }
