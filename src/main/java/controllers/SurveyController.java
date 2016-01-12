@@ -1,8 +1,8 @@
-package controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
+
 
 import main.java.Authority;
 import main.java.AuthorityImpl;
@@ -35,13 +35,11 @@ public class SurveyController {
 	@Autowired
 	private SurveyService surveyService;
 	private static Integer tokenj;
-
 	// Métodos
 
 	// Método para guardar la votación creada.
 	@RequestMapping(value = "/save", method = RequestMethod.POST, headers = "Content-Type=application/json")
-	public @ResponseBody
-	Survey save(@RequestBody String surveyJson,
+	public @ResponseBody Survey save(@RequestBody String surveyJson,
 			@CookieValue("user") String user, @CookieValue("token") String token)
 			throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
@@ -49,33 +47,31 @@ public class SurveyController {
 
 		CheckToken isValid = new CheckToken();
 		ObjectMapper checkToken = new ObjectMapper();
-		// Aqui hay que pasar la url de autentificacion
+		//Aqui hay que pasar la url de autentificacion
 		isValid = checkToken.readValue(new URL(
-				"http://auth-egc.azurewebsites.net/Help/api/checkToken?token="
-						+ token), domain.CheckToken.class);
+				"http://auth-egc.azurewebsites.net/Help/api/checkToken?token=" + token),
+				domain.CheckToken.class);
 		Assert.isTrue(isValid.getValid());
 		int i = surveyService.save(s);
 		Survey res = surveyService.findOne(i);
 		Authority a = new AuthorityImpl();
-		tokenj = CheckToken.calculateToken(res.getId());
-		a.postKey(String.valueOf(res.getId()), tokenj);
-
+		tokenj= CheckToken.calculateToken(res.getId());
+		a.postKey(String.valueOf(res.getId()),tokenj);
+		
 		return res;
 	}
 
 	// Método para guardar la votación con el censo. Relación con
 	// CREACION/ADMINISTRACION DE CENSO.
 	@RequestMapping(value = "/saveCensus", method = RequestMethod.GET)
-	public @ResponseBody
-	void saveCensus(@RequestParam Integer surveyId,
+	public @ResponseBody void saveCensus(@RequestParam Integer surveyId,
 			@RequestParam Integer censusId) throws JsonParseException,
 			JsonMappingException, IOException {
 		surveyService.addCensus(surveyId, censusId);
 	}
 
 	@RequestMapping(value = "/getcookies", method = RequestMethod.GET)
-	public @ResponseBody
-	String cookie(@CookieValue("user") String user,
+	public @ResponseBody String cookie(@CookieValue("user") String user,
 			@CookieValue("token") String token) {
 		return "{\"user\":\"" + user + "\", \"token\":\"" + token + "\"}";
 	}
@@ -84,14 +80,14 @@ public class SurveyController {
 	// Relación con CREACION/ADMINISTRACION DE CENSO.
 	@RequestMapping(value = "/mine", method = RequestMethod.GET)
 	public Collection<Survey> findAllSurveyByCreator(
-			@CookieValue("user") String user, @CookieValue("token") String token)
-			throws JsonParseException, JsonMappingException, IOException {
+			@CookieValue("user") String user, @CookieValue("token") String token) 
+			throws JsonParseException, JsonMappingException, IOException{
 		String creator = user;
 		CheckToken isValid = new CheckToken();
 		ObjectMapper checkToken = new ObjectMapper();
 		isValid = checkToken.readValue(new URL(
-				"http://auth-egc.azurewebsites.net/Help/api/checkToken?token="
-						+ token), domain.CheckToken.class);
+				"http://auth-egc.azurewebsites.net/Help/api/checkToken?token=" + token),
+				domain.CheckToken.class);
 		Assert.isTrue(isValid.getValid());
 		Collection<Survey> res = surveyService.allCreatedSurveys(creator);
 		return res;
@@ -104,7 +100,7 @@ public class SurveyController {
 		Collection<Survey> res = surveyService.allFinishedSurveys();
 		return res;
 	}
-
+	
 	// Método que devuelve la lista completa de finalizadas. Relación con
 	// VISUALIZACION.
 	@RequestMapping(value = "/allSurveys", method = RequestMethod.GET)
@@ -127,21 +123,20 @@ public class SurveyController {
 		Survey s = surveyService.findOne(id);
 		return s;
 	}
-
-	// Método que lista las encuestas
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	
+	//crear una votacion
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
 		ModelAndView result;
-		Collection<Survey> surveis;
+		Survey survey;
 
-		surveis = surveyService.findAll();
+		survey = surveyService.create();
 
-		result = new ModelAndView("vote/list");
-		System.out.println(surveis + "Hola");
-		result.addObject("survey", surveis);
+		result = new ModelAndView("vote/create");
+
+		result.addObject("survey", survey);
+		
 
 		return result;
-
 	}
-
 }
