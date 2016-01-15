@@ -20,9 +20,9 @@
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CreacionAdminVotaciones" />
-			<property name="javax.persistence.jdbc.user" value="acme-manager" />
-			<property name="javax.persistence.jdbc.password" value="ACME-M@n@ger-6874" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://egc.jeparca.com:3306/jeparcac_egcpollmanage" />
+			<property name="javax.persistence.jdbc.user" value="jeparcac_pollmgm" />
+			<property name="javax.persistence.jdbc.password" value="cw0zIlFbyc0t" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<!-- <property name="hibernate.hbm2ddl.auto" value="none" /> -->
