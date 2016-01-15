@@ -24,22 +24,22 @@ public class SurveyListController {
 	private SurveyService surveyService;
 	
 	// Método que lista las encuestas
-//	@RequestMapping(value = "/list", method = RequestMethod.GET)
-//	public ModelAndView list() {
-//		ModelAndView result;
-//		Collection<Survey> surveis;
-//
-//		surveis = surveyService.findAll();
-//
-//		result = new ModelAndView("#/vote/list");
-//		System.out.println(surveis + "Hola");
-//		result.addObject("survey", surveis);
-//
-//		return result;
-//
-//	}
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Survey> surveis;
+
+		surveis = surveyService.allSurveys();
+
+		result = new ModelAndView("#/vote/list");
+		System.out.println(surveis + "Hola");
+		result.addObject("survey", surveis);
+
+		return result;
+
+	}
 	@ModelAttribute("list")
 	public Collection<Survey> getInstruments() {
-		return surveyService.findAll();
+		return surveyService.allSurveys();
 	}
 }

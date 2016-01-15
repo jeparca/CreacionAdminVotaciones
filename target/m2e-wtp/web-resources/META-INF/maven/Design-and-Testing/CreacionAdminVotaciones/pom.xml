@@ -335,8 +335,8 @@
 
 		<!-- Verificacion -->
 		<dependency>
-			<groupId>com.verificacion</groupId>
-			<artifactId>verificacion</artifactId>
+			<groupId>EGC</groupId>
+			<artifactId>Verificacion</artifactId>
 			<version>2.1.2</version>
 		</dependency>
 
